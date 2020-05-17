@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-buttons slot="start" defaultHref="/tabs/home">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detail Validasi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #validasiForm="ngForm" novalidate (ngSubmit)="cekData(validasiForm.form.value)">
+    <ion-list class="ion-no-padding">
+      <ion-item lines="full" color="light">
+        <ion-label class="ion-text-wrap">
+          <ion-text color="primary">
+            <h2><b>{{ val.odp }}</b></h2>
+          </ion-text>
+          <ion-text color="medium">
+            <p>{{ val.tanggal_validasi }}</p>
+          </ion-text>
+        </ion-label>
+        <ion-badge *ngIf="val.status == 0" slot="end" color="danger">Belum Laporan</ion-badge>
+      </ion-item>
+
+      
+      <ion-item *ngFor="let v of val.validasi" lines="full">
+        <ion-label *ngIf="v.port == 0" position="stacked"><b>ODP</b></ion-label>
+        <ion-label *ngIf="v.port != 0" position="stacked"><b>Port {{ v.port }}</b></ion-label>
+        <ion-note style="margin-top: 1em;" *ngIf="name.invalid" color="danger">Barcode harus terisi</ion-note>
+        <ion-input #name="ngModel" [class.ion-invalid]="name.invalid" id="{{v.port}}" name="{{v.port}}" value="{{v.barcode}}" [ngModel]="v.barcode" required></ion-input>
+        <ion-button (click)="scanBarcode(v.port)" slot="end" fill="outline" size="small">Scan QR</ion-button>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+
+<ion-footer class="ion-no-border ion-text-center ion-padding">
+  <ion-toolbar>
+    <ion-button [disabled]="validasiForm.form.invalid" (click)="validasiForm.onSubmit()" name="submit" color="danger" expand="block">SELESAI</ion-button>
+  </ion-toolbar>
+</ion-footer>
+
+<!-- <ion-content>
+  <form [formGroup]="validasiForm">
+    <ion-list class="ion-no-padding">
+      <ion-item lines="full" color="light">
+        <ion-label class="ion-text-wrap">
+          <ion-text color="primary">
+            <h2><b>{{ val.odp }}</b></h2>
+          </ion-text>
+          <ion-text color="medium">
+            <p>{{ val.tanggal_validasi }}</p>
+          </ion-text>
+        </ion-label>
+        <ion-badge *ngIf="val.status == 0" slot="end" color="danger">Belum Laporan</ion-badge>
+      </ion-item>
+
+      
+      <ion-item *ngFor="let v of val.validasi" lines="full">
+        <ion-input type="hidden" formControlName="id_odp" value="1"></ion-input>
+        <ion-input type="hidden" formControlName="port" value="{{v.port}}"></ion-input>
+        <ion-label *ngIf="v.port == 0" position="stacked"><b>ODP</b></ion-label>
+        <ion-label *ngIf="v.port != 0" position="stacked"><b>Port {{ v.port }}</b></ion-label>
+        <ion-input formControlName="barcode" id="{{v.port}}" value="{{v.barcode}}"></ion-input>
+        <ion-button (click)="scanBarcode(v.port)" slot="end" fill="outline" size="small">Scan QR</ion-button>
+      </ion-item>
+    </ion-list>
+    {{validasiForm.value | json}}
+  </form>
+</ion-content>
+
+<ion-footer class="ion-no-border ion-text-center ion-padding">
+  <ion-toolbar>
+    <ion-button name="submit" color="danger" expand="block">SELESAI</ion-button>
+  </ion-toolbar>
+</ion-footer> -->

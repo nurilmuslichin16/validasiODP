@@ -1,5 +1,7 @@
 {
   "name": "validasiODP",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

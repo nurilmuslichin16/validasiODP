@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Akun</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list class="ion-no-padding">
+    <ion-item lines="none">
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label class="ion-text-wrap">
+        <ion-text color="primary">
+          <h3><b>Nuril Muslichin</b></h3>
+        </ion-text>
+        <ion-text color="medium">
+          <p>ID Telegram: 9909822</p>
+        </ion-text>
+      </ion-label>
+      <ion-badge slot="end" color="success">Aktif</ion-badge>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-button color="warning" fill="solid" expand="block">
+      <ion-icon name="key"></ion-icon> &nbsp;Ubah Button
+    </ion-button>
+  </ion-list>
+
+  <ion-list class="ion-no-padding">
+    <ion-button (click)="logout()" color="danger" fill="solid" expand="block">
+      <ion-icon name="log-out"></ion-icon> &nbsp;Logout
+    </ion-button>
+  </ion-list>
+</ion-content>

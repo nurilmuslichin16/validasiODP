@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar color="danger">
+    <ion-title>Validasi</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-down"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-text class="ion-text-center" color="medium">
+    <p style="font-size: 11px;">Tarik ke bawah untuk memperbarui data</p>
+  </ion-text>
+  <ion-list lines="full" mode="md" class="ion-no-padding">
+    <ion-item *ngFor="let val of validasi" detail="true" button (click)="detailHome(val.id)">
+      <ion-label class="ion-text-wrap">
+        <ion-text>
+          {{ val.odp }}
+        </ion-text>
+        <ion-text color="medium">
+          <p>{{ val.tanggal_validasi }}</p>
+        </ion-text>
+      </ion-label>
+      <ion-badge *ngIf="val.status == 0" slot="end" color="danger" size="small">Belum Laporan</ion-badge>
+    </ion-item>
+  </ion-list>
+</ion-content>
