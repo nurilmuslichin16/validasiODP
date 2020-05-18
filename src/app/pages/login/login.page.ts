@@ -69,11 +69,14 @@ export class LoginPage implements OnInit {
       finalize(() => loading.dismiss())
     )
     .subscribe(data => {
-      console.log(data.headers);
-      console.log(data.status);
-      console.log(data.data);
-      console.log(data.data.status);
-      if(data.data.status == 'success') {
+      // console.log(data.headers);
+      // console.log(data.status);
+      // console.log(data.data);
+      // console.log(data.data.status);
+      let response = JSON.parse(data.data);
+      console.log(response);
+      console.log(response.status);
+      if(response.status == 'success') {
         localStorage.setItem("telegram_id", data.data.telegram_id);
         localStorage.setItem("nama_teknisi", data.data.nama_teknisi);
         this.sukses();
