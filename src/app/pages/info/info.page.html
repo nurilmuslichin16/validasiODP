@@ -22,7 +22,7 @@
   </ion-segment>
 
   <ion-card *ngIf="qrData" class="ion-text-center">
-    <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="qrData"></ngx-qrcode>
+    <ngx-qrcode [elementType]="elementType" [value]="qrData"></ngx-qrcode>
     <ion-card-content>
       <ion-button expand="block" color="success" *ngIf="elementType === 'canvas'" (click)="donwloadQR()">
         <ion-icon name="download-outline"></ion-icon>&nbsp;

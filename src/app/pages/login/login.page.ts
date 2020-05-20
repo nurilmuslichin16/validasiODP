@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, LoadingController } from '@ionic/angular';
 import { LoginService } from 'src/app/services/login.service';
-import { HttpClient } from '@angular/common/http';
 import { HTTP } from '@ionic-native/http/ngx';
 import { finalize } from 'rxjs/operators';
 import { from } from 'rxjs';
@@ -16,7 +15,7 @@ export class LoginPage implements OnInit {
 
   public id_telegram = null;
 
-  constructor(private route: Router, private toast: ToastController, private lg: LoginService, private http: HttpClient, private nativeHttp: HTTP, private loadingCtrl: LoadingController) { }
+  constructor(private route: Router, private toast: ToastController, private lg: LoginService, private nativeHttp: HTTP, private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     let cekIdTelegram = localStorage.getItem("id_telegram");
@@ -60,28 +59,20 @@ export class LoginPage implements OnInit {
     let loading = await this.loadingCtrl.create();
     await loading.present();
 
-    let nativeCall = this.nativeHttp.post('https://dava.jarvisid.com/api/login', {telegram_id: getIdTelegram}, {
-      'Accept' : 'json',
-      'Content-Type' : 'application/json'
-    })
+    let nativeCall = this.nativeHttp.post('https://dava.jarvisid.com/api/login', {telegram_id: getIdTelegram}, {})
 
     from(nativeCall).pipe(
       finalize(() => loading.dismiss())
     )
     .subscribe(data => {
-      // console.log(data.headers);
-      // console.log(data.status);
-      // console.log(data.data);
-      // console.log(data.data.status);
       let response = JSON.parse(data.data);
-      console.log(response);
-      console.log(response.status);
       if(response.status == 'success') {
-        localStorage.setItem("telegram_id", data.data.telegram_id);
-        localStorage.setItem("nama_teknisi", data.data.nama_teknisi);
+        localStorage.setItem("id_telegram", response.telegram_id);
+        localStorage.setItem("nama_teknisi", response.nama_teknisi);
         this.sukses();
+        const r = this.route.navigate(['/tabs/home']);
         setTimeout(function(){
-          this.router.navigate(['/tabs/home']);
+          return r;
         }, 1000);
       } else {
         this.gagal();
